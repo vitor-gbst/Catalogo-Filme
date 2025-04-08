@@ -1,3 +1,7 @@
+<?php
+$filmes = file_exists('filmes.json') ? json_decode(file_get_contents('filmes.json'), true) : [];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,9 +48,53 @@
       </header>
 
 
-      <div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis blanditiis quam enim molestiae saepe quibusdam ducimus itaque, dolores fugiat, debitis tenetur quidem temporibus praesentium laboriosam. Aliquam qui amet sunt quaerat!</p>
+      <div class="container py-5">
+    <h2 class="display-4">Filmes</h2>
+    <p class="lead">Ultimos filmes adicionados.</p>
+
+    <?php if (count($filmes) > 0): ?>
+      <div id="carouselFilmes" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <?php foreach ($filmes as $index => $filme): ?>
+            <a href="detalhes.php?id=<?php echo$index; ?>">
+            <div class="carousel-item <?php if ($index === 0) echo 'active'; ?>">
+            <div class="d-flex justify-content-center">
+              <div class="card-filme p-4">
+                <img src="uploads/<?php echo $filme['poster']; ?>" alt="<?php echo $filme['nome']; ?>">
+                <div class="info">
+                  <h3><?php echo $filme['nome']; ?></h3>
+                  <p><strong>Produtora:</strong> <?php echo $filme['produtora']; ?></p>
+                  <?php 
+                      $resumo = substr($filme['sinopse'], 0, 10); 
+                      echo nl2br($resumo) . '...';
+                    ?>
+                  </p><p><strong>Sinopse:</strong> <?php echo nl2br($resumo); ?>
+                  
+                  <a style="color: #d97821;" href="detalhes.php?id=<?php echo $index; ?>" class="mostrar-mais">Mostrar mais..</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+          <?php endforeach; ?>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselFilmes" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselFilmes" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
       </div>
+    <?php else: ?>
+      <p>Nenhum filme cadastrado ainda.</p>
+    <?php endif; ?>
+
+    <div class="mt-4">
+      <a href="adicionar_filme.php" class="btn botao">Adicionar Filme</a>
+    </div>
+  </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
