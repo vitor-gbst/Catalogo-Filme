@@ -1,0 +1,209 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+body{
+    background-color: #151515;
+    color: #ffff;
+}
+/* Remove sombra, borda e outline de tudo que pode receber foco */
+*:focus,
+*:active,
+*:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Estilo limpo para todos os botões */
+/* Remove completamente os efeitos de foco e clique dos botões */
+button,
+.btn {
+  color: white;
+  border: none;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: none !important;
+}
+
+/* Remove o efeito de foco (ex: tab) */
+button:focus,
+.btn:focus,
+button:active,
+.btn:active,
+button:focus-visible,
+.btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+/* Evita que o botão mude a aparência ao ser clicado */
+button:focus:not(:focus-visible),
+.btn:focus:not(:focus-visible) {
+  box-shadow: none !important;
+  outline: none !important;
+}
+/* Estilo limpo para todos os inputs */
+input,
+textarea,
+select,
+.form-control {
+  background-color: inherit;
+  color: white;
+  border: none;
+  border-radius: 0;
+  box-shadow: none !important;
+  transition: none;
+}
+
+/* Impede mudança de cor em links ao clicar ou focar */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:focus,
+a:active,
+a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  color: inherit;
+}
+
+
+header{
+
+    background-color: #151515;
+}
+.texto{
+    color: #ffff;
+}
+.hero-section {
+    background-image: url('1181492.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6); /* Escurece a imagem pra dar contraste */
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-text {
+    max-width: 600px;
+  }
+
+  .search-box {
+    flex: 1;
+    max-width: 500px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .search-label {
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  
+  .search-input {
+    background-color: #1e1e1e;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 12px;
+    font-size: 16px;
+    outline: none;
+    box-shadow: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .search-input::placeholder {
+    color: #aaa;
+  }
+  
+  .search-input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: #fff;
+    background-color: #252525;
+    
+  }
+  
+  .search-btn {
+    background-color: #d97821;
+    color: white;
+    border: none;
+    border-bottom-right-radius: 10px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .search-btn:hover {
+    background-color: #b85c17;
+  }
+  
+  
+  
+  
+  
+  .navbar {
+    background-color: #151515 !important;
+    color: #fff;
+    z-index: 1000;
+    height: 13vh;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .navbar .nav-link,
+  .navbar-brand {
+    color: white !important;
+  }
+
+  
+  .botao {
+    background-color: #d97821;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover: leve destaque */
+  .botao:hover {
+    background-color: #b85c17;
+  }
+  
+  /* Clique: muda temporariamente */
+  .botao:active {
+    background-color: #b85c17;
+  }
+  
+  /* Remove bordas e sombras ao focar (tecla TAB ou clique) */
+  .botao:focus {
+    outline: none;
+    box-shadow: none;
+  }
