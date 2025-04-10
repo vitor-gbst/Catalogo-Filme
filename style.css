@@ -8,6 +8,9 @@ body{
     background-color: #151515;
     color: #ffff;
 }
+html{
+  scroll-behavior: smooth;
+}
 /* Remove sombra, borda e outline de tudo que pode receber foco */
 *:focus,
 *:active,
@@ -208,6 +211,7 @@ header{
     box-shadow: none;
   }
 
+
   .carousel-item .card {
     background-color: #1e1e1e;
     color: white;
@@ -240,14 +244,5 @@ header{
     object-fit: cover;
     width: 100%;
   }
-  .sinopse {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* número de linhas */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  
   

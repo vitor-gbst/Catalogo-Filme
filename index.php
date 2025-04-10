@@ -1,5 +1,17 @@
 <?php
-$filmes = file_exists('filmes.json') ? json_decode(file_get_contents('filmes.json'), true) : [];
+$filmesOriginais = file_exists('filmes.json') ? json_decode(file_get_contents('filmes.json'), true) : [];
+$filmes = [];
+
+if (isset($_GET['busca']) && !empty(trim($_GET['busca']))) {
+    $termoBusca = mb_strtolower(trim($_GET['busca']));
+    foreach ($filmesOriginais as $index => $filme) {
+        if (mb_strpos(mb_strtolower($filme['nome']), $termoBusca) !== false) {
+            $filmes[$index] = $filme;
+        }
+    }
+} else {
+    $filmes = $filmesOriginais;
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,26 +47,33 @@ $filmes = file_exists('filmes.json') ? json_decode(file_get_contents('filmes.jso
           <div class="hero-text">
             <h1 class="display-4">Descubra filmes incríveis</h1>
             <p class="lead">Explore os melhores títulos em um só lugar.</p>
-            <a href="#" class="botao btn btn-dark mt-3">Ver catálogo</a>
+            <a href="#filmes" class="botao btn btn-dark mt-3">Ver catálogo</a>
           </div>
           <div class="search-box">
             <label class="search-label mb-2">Procure o filme desejado</label>
             <div class="input-group">
-              <input type="text" class="form-control form-control-lg search-input" placeholder="Buscar filmes...">
-              <button class="btn btn-dark search-btn" type="button">Procurar</button>
+            <form method="GET" class="input-group">
+              <input type="text" name="busca" class="form-control form-control-lg search-input" placeholder="Buscar filmes..." value="<?php echo isset($_GET['busca']) ? htmlspecialchars($_GET['busca']) : ''; ?>">
+              <button class="btn btn-dark search-btn" type="submit">Procurar</button>
+            </form>
+
             </div>
           </div>
         </div>
       </header>
 
 
-      <div class="container py-5">
+      <div style="background-color: #1e1e1e;
+      padding: 30px;
+      margin-top: 50px;"
+      class="container py-5 catalago-filmes" id="filmes">
     <h2 class="display-4">Filmes</h2>
-    <p class="lead">Ultimos filmes adicionados.</p>
+    <p class="lead">Filmes adicionados ao catálogo.</p>
 
     <?php if (count($filmes) > 0): ?>
       <div id="carouselFilmes" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
+          
           <?php foreach ($filmes as $index => $filme): ?>
             <a href="detalhes.php?id=<?php echo$index; ?>">
             <div class="carousel-item <?php if ($index === 0) echo 'active'; ?>">
@@ -63,12 +82,11 @@ $filmes = file_exists('filmes.json') ? json_decode(file_get_contents('filmes.jso
                 <img src="uploads/<?php echo $filme['poster']; ?>" alt="<?php echo $filme['nome']; ?>">
                 <div class="info">
                   <h3><?php echo $filme['nome']; ?></h3>
-                  <p><strong>Produtora:</strong> <?php echo $filme['produtora']; ?></p>
+                  <p>Produtora: <?php echo $filme['produtora']; ?></p>
                   <?php 
                       $resumo = substr($filme['sinopse'], 0, 10); 
-                      echo nl2br($resumo) . '...';
                     ?>
-                  </p><p><strong>Sinopse:</strong> <?php echo nl2br($resumo); ?>
+                  </p><p>Sinopse: <?php echo nl2br($resumo); ?>
                   
                   <a style="color: #d97821;" href="detalhes.php?id=<?php echo $index; ?>" class="mostrar-mais">Mostrar mais..</a>
                   </p>
@@ -87,8 +105,12 @@ $filmes = file_exists('filmes.json') ? json_decode(file_get_contents('filmes.jso
           <span class="carousel-control-next-icon"></span>
         </button>
       </div>
+    <?php else: ?>  
+    <?php if (empty($filmes)): ?>
+          <p>Nenhum filme encontrado com esse nome.</p>
     <?php else: ?>
       <p>Nenhum filme cadastrado ainda.</p>
+    <?php endif; ?>
     <?php endif; ?>
 
     <div class="mt-4">
@@ -96,7 +118,7 @@ $filmes = file_exists('filmes.json') ? json_decode(file_get_contents('filmes.jso
     </div>
   </div>
 
-
+  <?php include 'footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>
